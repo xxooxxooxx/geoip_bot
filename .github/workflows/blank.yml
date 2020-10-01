@@ -1,0 +1,37 @@
+name: c
+
+on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+  schedule:
+    - cron:  '0 8 20 * *'
+#    - cron:  '*/2 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: sudo apt-get update
+      - run: sudo apt-get install perl libnet-cidr-lite-perl libtext-csv-perl
+      - run: bash ./sh.sh
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add geoip* xt_geoip
+          git commit -m "Robot update"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #- uses: actions/upload-artifact@main
+      #  with:
+      #    name: tor_geoip
+      #    path: |
+      #      geoip*
+      #      xt_geoip
