@@ -32,10 +32,10 @@ jobs:
       - name: XMPP notifier
         uses: processone/xmpp-notifier@master
         with:
-          jid: ${{ secrets.jid }}
-          password: ${{ secrets.password }}
-          server_host: ${{ secrets.server_host }}
-          recipient: ${{ secrets.recipient }}
+          jid: ${{ secrets.JID }}
+          password: ${{ secrets.PASSWORD }}
+          server_host: ${{ secrets.SERVER_HOST }}
+          recipient: ${{ secrets.RECIPIENT }}
           message: |
             XMPP notifier
           recipient_is_room: false
