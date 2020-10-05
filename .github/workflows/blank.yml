@@ -6,8 +6,8 @@ on:
 #  pull_request:
 #    branches: [ master ]
   schedule:
-#    - cron:  '0 8 20 * *'
-    - cron:  '*/2 * * * *'
+    - cron:  '0 8 20 * *'
+#    - cron:  '*/2 * * * *'
 
 jobs:
   build:
@@ -29,16 +29,6 @@ jobs:
         with:
           force: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: XMPP notifier
-        uses: processone/xmpp-notifier@v1.0.0
-        with:
-          jid: ${{ secrets.JID }}
-          password: ${{ secrets.PASSWORD }}
-          server_host: ${{ secrets.SERVER_HOST }}
-          recipient: ${{ secrets.RECIPIENT }}
-          message: |
-            XMPP notifier
-          recipient_is_room: false
       #- uses: actions/upload-artifact@main
       #  with:
       #    name: tor_geoip
